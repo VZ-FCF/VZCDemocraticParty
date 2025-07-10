@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
+        <link rel="stylesheet" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 678px;
+            height: 754px;
+        }
+        </style>
+        <title>Van Zandt County Democratic Party</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/L.Control.Layers.Tree.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/VanZandtCounty_1.js"></script>
+        <script src="data/VZC_Aquifer_2.js"></script>
+        <script src="data/VZC_ISD_3.js"></script>
+        <script src="data/VZC_Precincts_4.js"></script>
+        <script src="data/VZC_Rivers_5.js"></script>
+        <script src="data/VZC_AreaWater_6.js"></script>
+        <script src="data/VZC_CityBoundary_7.js"></script>
+        <script src="data/VZC_Cities_8.js"></script>
+        <script src="data/VCZ_FlowingStreams_9.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:false, maxZoom:28, minZoom:2
+        }).fitBounds([[32.197896620252614,-96.04965443839957],[32.882142626479734,-95.32001211594765]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        // remove popup's row if "visible-with-data"
+        function removeEmptyRowsFromPopupContent(content, feature) {
+         var tempDiv = document.createElement('div');
+         tempDiv.innerHTML = content;
+         var rows = tempDiv.querySelectorAll('tr');
+         for (var i = 0; i < rows.length; i++) {
+             var td = rows[i].querySelector('td.visible-with-data');
+             var key = td ? td.id : '';
+             if (td && td.classList.contains('visible-with-data') && feature.properties[key] == null) {
+                 rows[i].parentNode.removeChild(rows[i]);
+             }
+         }
+         return tempDiv.innerHTML;
+        }
+        // add class to format popup if it contains media
+		function addClassToPopupIfMedia(content, popup) {
+			var tempDiv = document.createElement('div');
+			tempDiv.innerHTML = content;
+			if (tempDiv.querySelector('td img')) {
+				popup._contentNode.classList.add('media');
+					// Delay to force the redraw
+					setTimeout(function() {
+						popup.update();
+					}, 10);
+			} else {
+				popup._contentNode.classList.remove('media');
+			}
+		}
+        var title = new L.Control({'position':'topleft'});
+        title.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info');
+            this.update();
+            return this._div;
+        };
+        title.update = function () {
+            this._div.innerHTML = '<h2>Van Zandt County Democratic Party</h2>';
+        };
+        title.addTo(map);
+        var abstract = new L.Control({'position':'bottomleft'});
+        abstract.onAdd = function (map) {
+            this._div = L.DomUtil.create('div',
+            'leaflet-control abstract');
+            this._div.id = 'abstract'
+                this._div.setAttribute("onmouseenter", "abstract.show()");
+                this._div.setAttribute("onmouseleave", "abstract.hide()");
+                this.hide();
+                return this._div;
+            };
+            abstract.hide = function () {
+                this._div.classList.remove("abstractUncollapsed");
+                this._div.classList.add("abstract");
+                this._div.innerHTML = 'i'
+            }
+            abstract.show = function () {
+                this._div.classList.remove("abstract");
+                this._div.classList.add("abstractUncollapsed");
+                this._div.innerHTML = 'Acknowledgements:<br />Texas Redistricting, PLANC2193, 2023: https://redistricting.capitol.texas.gov<br />Capitol Data Portal, 2024-2025:  https://data.capitol.texas.gov/dataset/school-districts<br />Texas Department of Transportation:  https://gis-txdot.opendata.arcgis.com/datasets/texas-county-boundaries-detailed/explore<br />United States Census,TIGER/Line® Shapefiles: https://www.census.gov/cgi-bin/geo/shapefiles/index.php<br />Van Zandt County Democratic Party Van Zandt County Map powered by: <br />QGIS: https://qgis.org/<br />GQIS2WEB: https://plugins.qgis.org/plugins/qgis2web/<br />Leaflet<br />GitHub: https://github.com/<br />Copyright OpenStreetMap Contributors CC-BY-SA';
+        };
+        abstract.addTo(map);
+        var zoomControl = L.control.zoom({
+            position: 'topleft'
+        }).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_OSMStandard_0');
+        map.getPane('pane_OSMStandard_0').style.zIndex = 400;
+        var layer_OSMStandard_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            pane: 'pane_OSMStandard_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors, CC-BY-SA</a>',
+            minZoom: 2,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OSMStandard_0;
+        map.addLayer(layer_OSMStandard_0);
+        function pop_VanZandtCounty_1(feature, layer) {
+            var popupContent = '<table>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VanZandtCounty_1_0() {
+            return {
+                pane: 'pane_VanZandtCounty_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_VanZandtCounty_1');
+        map.getPane('pane_VanZandtCounty_1').style.zIndex = 401;
+        map.getPane('pane_VanZandtCounty_1').style['mix-blend-mode'] = 'normal';
+        var layer_VanZandtCounty_1 = new L.geoJson(json_VanZandtCounty_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_VanZandtCounty_1',
+            layerName: 'layer_VanZandtCounty_1',
+            pane: 'pane_VanZandtCounty_1',
+            onEachFeature: pop_VanZandtCounty_1,
+            style: style_VanZandtCounty_1_0,
+        });
+        bounds_group.addLayer(layer_VanZandtCounty_1);
+        map.addLayer(layer_VanZandtCounty_1);
+        function pop_VZC_Aquifer_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AQ_NAME'] !== null ? autolinker.link(String(feature.properties['AQ_NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_VZC_Aquifer_2_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_VZC_Aquifer_2rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Aquifer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.40399999999999997)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.40399999999999997)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Aquifer_2rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Aquifer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.40399999999999997)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,197,196,0.40399999999999997)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Aquifer_2rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Aquifer_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.40399999999999997)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,0.40399999999999997)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_VZC_Aquifer_2');
+        map.getPane('pane_VZC_Aquifer_2').style.zIndex = 402;
+        map.getPane('pane_VZC_Aquifer_2').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Aquifer_2 = new L.geoJson(json_VZC_Aquifer_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_Aquifer_2',
+            layerName: 'layer_VZC_Aquifer_2',
+            pane: 'pane_VZC_Aquifer_2',
+            onEachFeature: pop_VZC_Aquifer_2,
+            style: style_VZC_Aquifer_2_0,
+        });
+        bounds_group.addLayer(layer_VZC_Aquifer_2);
+        function pop_VZC_ISD_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME20'] !== null ? autolinker.link(String(feature.properties['NAME20']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Web Site'] !== null ? autolinker.link(String(feature.properties['Web Site']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_VZC_ISD_3_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_VZC_ISD_3rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,202,130,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(195,115,224,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(140,151,238,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,203,57,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,125,53,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule5_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,107,156,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule6_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule7_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(243,237,149,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(243,237,149,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule8_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,139,143,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule9_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,82,45,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule10_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(190,178,151,0.309)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_ISD_3rule11_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(183,72,75,0.309)',
+                interactive: true,
+            };
+                }
+            else {
+                return {
+                pane: 'pane_VZC_ISD_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.309)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.309)',
+                interactive: true,
+            };
+            }
+        }
+        map.createPane('pane_VZC_ISD_3');
+        map.getPane('pane_VZC_ISD_3').style.zIndex = 403;
+        map.getPane('pane_VZC_ISD_3').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_ISD_3 = new L.geoJson(json_VZC_ISD_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_ISD_3',
+            layerName: 'layer_VZC_ISD_3',
+            pane: 'pane_VZC_ISD_3',
+            onEachFeature: pop_VZC_ISD_3,
+            style: style_VZC_ISD_3_0,
+        });
+        bounds_group.addLayer(layer_VZC_ISD_3);
+        function pop_VZC_Precincts_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td class="visible-with-data" id="PREC" colspan="2"><strong>Voting Precinct</strong><br />' + (feature.properties['PREC'] !== null ? autolinker.link(String(feature.properties['PREC']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="LOC" colspan="2"><strong>Voting Location</strong><br />' + (feature.properties['LOC'] !== null ? autolinker.link(String(feature.properties['LOC']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td class="visible-with-data" id="LINK" colspan="2"><strong>Address</strong><br />' + (feature.properties['LINK'] !== null ? autolinker.link(String(feature.properties['LINK']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_VZC_Precincts_4_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_VZC_Precincts_4rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,238,251,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,240,252,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,238,251,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,238,251,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,240,252,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule5_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,219,177,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule6_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,219,177,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule7_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,219,177,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule8_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,219,177,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule9_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,188,224,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule10_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,188,224,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule11_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,188,224,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule12_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(192,188,224,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule13_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,199,171,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule14_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,199,171,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule15_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,199,171,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule16_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,199,171,0.301)',
+                interactive: true,
+            };
+                }
+                else if (exp_VZC_Precincts_4rule17_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Precincts_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.301)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,199,171,0.301)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_VZC_Precincts_4');
+        map.getPane('pane_VZC_Precincts_4').style.zIndex = 404;
+        map.getPane('pane_VZC_Precincts_4').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Precincts_4 = new L.geoJson(json_VZC_Precincts_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_Precincts_4',
+            layerName: 'layer_VZC_Precincts_4',
+            pane: 'pane_VZC_Precincts_4',
+            onEachFeature: pop_VZC_Precincts_4,
+            style: style_VZC_Precincts_4_0,
+        });
+        bounds_group.addLayer(layer_VZC_Precincts_4);
+        map.addLayer(layer_VZC_Precincts_4);
+        function pop_VZC_Rivers_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RCH_'] !== null ? autolinker.link(String(feature.properties['RCH_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RCH_ID'] !== null ? autolinker.link(String(feature.properties['RCH_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">COM_ID</th>\
+                        <td class="visible-with-data" id="COM_ID">' + (feature.properties['COM_ID'] !== null ? autolinker.link(String(feature.properties['COM_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RCH_CODE</th>\
+                        <td>' + (feature.properties['RCH_CODE'] !== null ? autolinker.link(String(feature.properties['RCH_CODE']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RCH_DATE'] !== null ? autolinker.link(String(feature.properties['RCH_DATE']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LEVEL_'] !== null ? autolinker.link(String(feature.properties['LEVEL_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['METERS'] !== null ? autolinker.link(String(feature.properties['METERS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GNIS_ID'] !== null ? autolinker.link(String(feature.properties['GNIS_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(String(feature.properties['NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_len'] !== null ? autolinker.link(String(feature.properties['SHAPE_len']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VZC_Rivers_5_0() {
+            return {
+                pane: 'pane_VZC_Rivers_5',
+                opacity: 1,
+                color: 'rgba(29,14,145,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_VZC_Rivers_5');
+        map.getPane('pane_VZC_Rivers_5').style.zIndex = 405;
+        map.getPane('pane_VZC_Rivers_5').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Rivers_5 = new L.geoJson(json_VZC_Rivers_5, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_VZC_Rivers_5',
+            layerName: 'layer_VZC_Rivers_5',
+            pane: 'pane_VZC_Rivers_5',
+            onEachFeature: pop_VZC_Rivers_5,
+            style: style_VZC_Rivers_5_0,
+        });
+        bounds_group.addLayer(layer_VZC_Rivers_5);
+        function pop_VZC_AreaWater_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FULLNAME'] !== null ? autolinker.link(String(feature.properties['FULLNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Latitude</th>\
+                        <td class="visible-with-data" id="INTPTLAT">' + (feature.properties['INTPTLAT'] !== null ? autolinker.link(String(feature.properties['INTPTLAT']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Longitude</th>\
+                        <td class="visible-with-data" id="INTPTLON">' + (feature.properties['INTPTLON'] !== null ? autolinker.link(String(feature.properties['INTPTLON']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VZC_AreaWater_6_0() {
+            return {
+                pane: 'pane_VZC_AreaWater_6',
+                opacity: 1,
+                color: 'rgba(31,120,180,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VZC_AreaWater_6');
+        map.getPane('pane_VZC_AreaWater_6').style.zIndex = 406;
+        map.getPane('pane_VZC_AreaWater_6').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_AreaWater_6 = new L.geoJson(json_VZC_AreaWater_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_AreaWater_6',
+            layerName: 'layer_VZC_AreaWater_6',
+            pane: 'pane_VZC_AreaWater_6',
+            onEachFeature: pop_VZC_AreaWater_6,
+            style: style_VZC_AreaWater_6_0,
+        });
+        bounds_group.addLayer(layer_VZC_AreaWater_6);
+        function pop_VZC_CityBoundary_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(String(feature.properties['NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Web Site'] !== null ? autolinker.link(String(feature.properties['Web Site']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['More...'] !== null ? autolinker.link(String(feature.properties['More...']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VZC_CityBoundary_7_0() {
+            return {
+                pane: 'pane_VZC_CityBoundary_7',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.302)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,247,173,0.302)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_VZC_CityBoundary_7');
+        map.getPane('pane_VZC_CityBoundary_7').style.zIndex = 407;
+        map.getPane('pane_VZC_CityBoundary_7').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_CityBoundary_7 = new L.geoJson(json_VZC_CityBoundary_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_CityBoundary_7',
+            layerName: 'layer_VZC_CityBoundary_7',
+            pane: 'pane_VZC_CityBoundary_7',
+            onEachFeature: pop_VZC_CityBoundary_7,
+            style: style_VZC_CityBoundary_7_0,
+        });
+        bounds_group.addLayer(layer_VZC_CityBoundary_7);
+        function pop_VZC_Cities_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CITY_NM'] !== null ? autolinker.link(String(feature.properties['CITY_NM']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+        function style_VZC_Cities_8_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_VZC_Cities_8rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_VZC_Cities_8',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,155,111,1.0)',
+                interactive: true,
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
+            }
+        }
+        map.createPane('pane_VZC_Cities_8');
+        map.getPane('pane_VZC_Cities_8').style.zIndex = 408;
+        map.getPane('pane_VZC_Cities_8').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Cities_8 = new L.geoJson(json_VZC_Cities_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_VZC_Cities_8',
+            layerName: 'layer_VZC_Cities_8',
+            pane: 'pane_VZC_Cities_8',
+            onEachFeature: pop_VZC_Cities_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_VZC_Cities_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_VZC_Cities_8);
+        map.addLayer(layer_VZC_Cities_8);
+        function pop_VCZ_FlowingStreams_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STRM_NM'] !== null ? autolinker.link(String(feature.properties['STRM_NM']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_VCZ_FlowingStreams_9_0() {
+            return {
+                pane: 'pane_VCZ_FlowingStreams_9',
+                opacity: 1,
+                color: 'rgba(24,42,240,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+        }
+        map.createPane('pane_VCZ_FlowingStreams_9');
+        map.getPane('pane_VCZ_FlowingStreams_9').style.zIndex = 409;
+        map.getPane('pane_VCZ_FlowingStreams_9').style['mix-blend-mode'] = 'normal';
+        var layer_VCZ_FlowingStreams_9 = new L.geoJson(json_VCZ_FlowingStreams_9, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_VCZ_FlowingStreams_9',
+            layerName: 'layer_VCZ_FlowingStreams_9',
+            pane: 'pane_VCZ_FlowingStreams_9',
+            onEachFeature: pop_VCZ_FlowingStreams_9,
+            style: style_VCZ_FlowingStreams_9_0,
+        });
+        bounds_group.addLayer(layer_VCZ_FlowingStreams_9);
+        var overlaysTree = [
+            {label: '<img src="legend/VCZ_FlowingStreams_9.png" /> VCZ_FlowingStreams', layer: layer_VCZ_FlowingStreams_9},
+            {label: 'VZC_Cities<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Cities_8_0.png" /></td><td></td></tr></table>', layer: layer_VZC_Cities_8},
+            {label: '<img src="legend/VZC_CityBoundary_7.png" /> VZC_CityBoundary', layer: layer_VZC_CityBoundary_7},
+            {label: '<img src="legend/VZC_AreaWater_6.png" /> VZC_AreaWater', layer: layer_VZC_AreaWater_6},
+            {label: '<img src="legend/VZC_Rivers_5.png" /> VZC_Rivers', layer: layer_VZC_Rivers_5},
+            {label: 'VZC_Precincts<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_1A0.png" /></td><td>1A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_1B1.png" /></td><td>1B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_1C2.png" /></td><td>1C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_1D3.png" /></td><td>1D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_1E4.png" /></td><td>1E</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_2A5.png" /></td><td>2A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_2B6.png" /></td><td>2B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_2C7.png" /></td><td>2C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_2D8.png" /></td><td>2D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_3A9.png" /></td><td>3A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_3B10.png" /></td><td>3B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_3C11.png" /></td><td>3C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_3D12.png" /></td><td>3D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_4A13.png" /></td><td>4A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_4B14.png" /></td><td>4B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_4C15.png" /></td><td>4C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_4D16.png" /></td><td>4D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_4_4E17.png" /></td><td>4E</td></tr></table>', layer: layer_VZC_Precincts_4},
+            {label: 'VZC_ISD<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_AthensISD0.png" /></td><td>Athens ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_BrownsboroISD1.png" /></td><td>Brownsboro ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_CantonISD2.png" /></td><td>Canton ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_EdgewoodISD3.png" /></td><td>Edgewood ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_FruitvaleISD4.png" /></td><td>Fruitvale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_GrandSalineISD5.png" /></td><td>Grand Saline ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_LindaleISD6.png" /></td><td>Lindale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_MabankISD7.png" /></td><td>Mabank ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_MartinsMillISD8.png" /></td><td>Martins Mill ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_VanISD9.png" /></td><td>Van ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_WillsPointISD10.png" /></td><td>Wills Point ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_EustaceISD11.png" /></td><td>Eustace ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_3_Other12.png" /></td><td>Other</td></tr></table>', layer: layer_VZC_ISD_3},
+            {label: 'VZC_Aquifer<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_CarrizoWilcoxOutcrop1.png" /></td><td>Carrizo-Wilcox Outcrop</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_CarrizoWilcoxSubcrop2.png" /></td><td>Carrizo-Wilcox Subcrop</td></tr></table>', layer: layer_VZC_Aquifer_2},
+            {label: '<img src="legend/VanZandtCounty_1.png" /> VanZandtCounty', layer: layer_VanZandtCounty_1},
+            {label: "OSM Standard", layer: layer_OSMStandard_0},]
+        var lay = L.control.layers.tree(null, overlaysTree,{
+            //namedToggle: true,
+            //selectorBack: false,
+            //closedSymbol: '&#8862; &#x1f5c0;',
+            //openedSymbol: '&#8863; &#x1f5c1;',
+            //collapseAll: 'Collapse all',
+            //expandAll: 'Expand all',
+            collapsed: true,
+        });
+        lay.addTo(map);
+        setBounds();
+        var i = 0;
+        layer_VZC_Aquifer_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['AQ_NAME'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['AQ_NAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Aquifer_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_VZC_ISD_3.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAME20'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAME20']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_ISD_3'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_VZC_Precincts_4.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['PREC'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['PREC']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Precincts_4'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_VZC_Rivers_5.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['NAME'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Rivers_5'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        var i = 0;
+        layer_VCZ_FlowingStreams_9.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['STRM_NM'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['STRM_NM']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VCZ_FlowingStreams_9'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_VZC_Aquifer_2,layer_VZC_ISD_3,layer_VZC_Precincts_4,layer_VZC_Rivers_5,layer_VCZ_FlowingStreams_9]);
+        map.on("zoomend", function(){
+            resetLabels([layer_VZC_Aquifer_2,layer_VZC_ISD_3,layer_VZC_Precincts_4,layer_VZC_Rivers_5,layer_VCZ_FlowingStreams_9]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_VZC_Aquifer_2,layer_VZC_ISD_3,layer_VZC_Precincts_4,layer_VZC_Rivers_5,layer_VCZ_FlowingStreams_9]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_VZC_Aquifer_2,layer_VZC_ISD_3,layer_VZC_Precincts_4,layer_VZC_Rivers_5,layer_VCZ_FlowingStreams_9]);
+        });
+        </script>
+    </body>
+</html>
