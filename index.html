@@ -43,7 +43,7 @@
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:2
-        }).fitBounds([[32.197896620252614,-96.04965443839957],[32.882142626479734,-95.32001211594765]]);
+        }).fitBounds([[32.2444661489657,-96.1673038661322],[32.92835842181638,-95.43766154368026]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -103,7 +103,7 @@
             abstract.show = function () {
                 this._div.classList.remove("abstract");
                 this._div.classList.add("abstractUncollapsed");
-                this._div.innerHTML = 'Acknowledgements:<br />Texas Redistricting, PLANC2193, 2023: https://redistricting.capitol.texas.gov<br />Capitol Data Portal, 2024-2025:  https://data.capitol.texas.gov/dataset/school-districts<br />Texas Department of Transportation:  https://gis-txdot.opendata.arcgis.com/datasets/texas-county-boundaries-detailed/explore<br />United States Census,TIGER/Line® Shapefiles: https://www.census.gov/cgi-bin/geo/shapefiles/index.php<br />Van Zandt County Democratic Party Van Zandt County Map powered by: <br />QGIS: https://qgis.org/<br />GQIS2WEB: https://plugins.qgis.org/plugins/qgis2web/<br />Leaflet<br />GitHub: https://github.com/<br />Copyright OpenStreetMap Contributors CC-BY-SA';
+                this._div.innerHTML = 'Acknowledgements:<br />Texas Redistricting, PLANC2193, 2023: https://redistricting.capitol.texas.gov<br />Capitol Data Portal, 2024-2025:  https://data.capitol.texas.gov/dataset/school-districts<br />Texas Department of Transportation:  https://gis-txdot.opendata.arcgis.com/datasets/texas-county-boundaries-detailed/explore<br />United States Census,TIGER/Line® Shapefiles: https://www.census.gov/cgi-bin/geo/shapefiles/index.php<br />Van Zandt County Election Page: https://www.vanzandtcounty.org/page/vanzandt.Elections<br />Van Zandt County Democratic Party Van Zandt County Map powered by: <br />QGIS: https://qgis.org/<br />GQIS2WEB: https://plugins.qgis.org/plugins/qgis2web/<br />Leaflet<br />GitHub: https://github.com/<br />Copyright OpenStreetMap Contributors CC-BY-SA';
         };
         abstract.addTo(map);
         var zoomControl = L.control.zoom({
@@ -186,14 +186,14 @@
                   return {
                 pane: 'pane_VZC_Aquifer_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.40399999999999997)',
+                color: 'rgba(35,35,35,0.404)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,0.40399999999999997)',
+                fillColor: 'rgba(255,255,255,0.404)',
                 interactive: true,
             };
                 }
@@ -201,14 +201,14 @@
                   return {
                 pane: 'pane_VZC_Aquifer_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.40399999999999997)',
+                color: 'rgba(35,35,35,0.404)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(75,197,196,0.40399999999999997)',
+                fillColor: 'rgba(75,197,196,0.404)',
                 interactive: true,
             };
                 }
@@ -216,14 +216,14 @@
                   return {
                 pane: 'pane_VZC_Aquifer_2',
                 opacity: 1,
-                color: 'rgba(35,35,35,0.40399999999999997)',
+                color: 'rgba(35,35,35,0.404)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(31,120,180,0.40399999999999997)',
+                fillColor: 'rgba(31,120,180,0.404)',
                 interactive: true,
             };
                 }
