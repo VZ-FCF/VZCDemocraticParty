@@ -32,15 +32,10 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="data/VanZandtCounty_1.js"></script>
-        <script src="data/VZC_Aquifer_2.js"></script>
-        <script src="data/VZC_LithiumDeposits_3.js"></script>
-        <script src="data/VZC_ISD_4.js"></script>
-        <script src="data/VZC_Precincts_5.js"></script>
-        <script src="data/VZC_Rivers_6.js"></script>
-        <script src="data/VZC_AreaWater_7.js"></script>
-        <script src="data/VZC_CityBoundary_8.js"></script>
-        <script src="data/VZC_Cities_9.js"></script>
-        <script src="data/VCZ_FlowingStreams_10.js"></script>
+        <script src="data/VZC_ISD_2.js"></script>
+        <script src="data/VZC_Precincts_3.js"></script>
+        <script src="data/VZC_CityBoundary_4.js"></script>
+        <script src="data/VZC_Cities_5.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:2
@@ -165,251 +160,7 @@
         });
         bounds_group.addLayer(layer_VanZandtCounty_1);
         map.addLayer(layer_VanZandtCounty_1);
-        function pop_VZC_Aquifer_2(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['AQ_NAME'] !== null ? autolinker.link(String(feature.properties['AQ_NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-        function style_VZC_Aquifer_2_0(feature) {
-            var context = {
-                feature: feature,
-                variables: {}
-            };
-            // Start of if blocks and style check logic
-            if (exp_VZC_Aquifer_2rule0_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_Aquifer_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.404)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,255,255,0.404)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_Aquifer_2rule1_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_Aquifer_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.404)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(75,197,196,0.404)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_Aquifer_2rule2_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_Aquifer_2',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.404)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(31,120,180,0.404)',
-                interactive: true,
-            };
-                }
-            else {
-                return {fill: false, stroke: false};
-            }
-        }
-        map.createPane('pane_VZC_Aquifer_2');
-        map.getPane('pane_VZC_Aquifer_2').style.zIndex = 402;
-        map.getPane('pane_VZC_Aquifer_2').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_Aquifer_2 = new L.geoJson(json_VZC_Aquifer_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_VZC_Aquifer_2',
-            layerName: 'layer_VZC_Aquifer_2',
-            pane: 'pane_VZC_Aquifer_2',
-            onEachFeature: pop_VZC_Aquifer_2,
-            style: style_VZC_Aquifer_2_0,
-        });
-        bounds_group.addLayer(layer_VZC_Aquifer_2);
-        function pop_VZC_LithiumDeposits_3(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['REGNAME'] !== null ? autolinker.link(String(feature.properties['REGNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['PROVNAME'] !== null ? autolinker.link(String(feature.properties['PROVNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['TPSNAME'] !== null ? autolinker.link(String(feature.properties['TPSNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['ASSESSNAME'] !== null ? autolinker.link(String(feature.properties['ASSESSNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-        function style_VZC_LithiumDeposits_3_0(feature) {
-            var context = {
-                feature: feature,
-                variables: {}
-            };
-            // Start of if blocks and style check logic
-            if (exp_VZC_LithiumDeposits_3rule0_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(227,26,28,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule1_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,127,0,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule2_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(253,191,111,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule3_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(166,206,227,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule4_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(220,232,124,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule5_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(150,164,34,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule6_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(112,98,224,0.548)',
-                interactive: true,
-            };
-                }
-                else if (exp_VZC_LithiumDeposits_3rule7_eval_expression(context)) {
-                  return {
-                pane: 'pane_VZC_LithiumDeposits_3',
-                opacity: 1,
-                color: 'rgba(35,35,35,0.548)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(192,188,224,0.548)',
-                interactive: true,
-            };
-                }
-            else {
-                return {fill: false, stroke: false};
-            }
-        }
-        map.createPane('pane_VZC_LithiumDeposits_3');
-        map.getPane('pane_VZC_LithiumDeposits_3').style.zIndex = 403;
-        map.getPane('pane_VZC_LithiumDeposits_3').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_LithiumDeposits_3 = new L.geoJson(json_VZC_LithiumDeposits_3, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_VZC_LithiumDeposits_3',
-            layerName: 'layer_VZC_LithiumDeposits_3',
-            pane: 'pane_VZC_LithiumDeposits_3',
-            onEachFeature: pop_VZC_LithiumDeposits_3,
-            style: style_VZC_LithiumDeposits_3_0,
-        });
-        bounds_group.addLayer(layer_VZC_LithiumDeposits_3);
-        function pop_VZC_ISD_4(feature, layer) {
+        function pop_VZC_ISD_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['NAME20'] !== null ? autolinker.link(String(feature.properties['NAME20']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -424,15 +175,15 @@
 			});
 			layer.bindPopup(content, { maxHeight: 400 });
         }
-        function style_VZC_ISD_4_0(feature) {
+        function style_VZC_ISD_2_0(feature) {
             var context = {
                 feature: feature,
                 variables: {}
             };
             // Start of if blocks and style check logic
-            if (exp_VZC_ISD_4rule0_eval_expression(context)) {
+            if (exp_VZC_ISD_2rule0_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -445,9 +196,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule1_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule1_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -460,9 +211,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule2_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule2_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -475,9 +226,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule3_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule3_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -490,9 +241,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule4_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule4_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -505,9 +256,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule5_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule5_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -520,9 +271,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule6_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule6_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -535,9 +286,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule7_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule7_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(243,237,149,0.309)',
                 dashArray: '',
@@ -550,9 +301,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule8_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule8_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -565,9 +316,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule9_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule9_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -580,9 +331,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule10_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule10_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -595,9 +346,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_ISD_4rule11_eval_expression(context)) {
+                else if (exp_VZC_ISD_2rule11_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -612,7 +363,7 @@
                 }
             else {
                 return {
-                pane: 'pane_VZC_ISD_4',
+                pane: 'pane_VZC_ISD_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.309)',
                 dashArray: '',
@@ -626,20 +377,20 @@
             };
             }
         }
-        map.createPane('pane_VZC_ISD_4');
-        map.getPane('pane_VZC_ISD_4').style.zIndex = 404;
-        map.getPane('pane_VZC_ISD_4').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_ISD_4 = new L.geoJson(json_VZC_ISD_4, {
+        map.createPane('pane_VZC_ISD_2');
+        map.getPane('pane_VZC_ISD_2').style.zIndex = 402;
+        map.getPane('pane_VZC_ISD_2').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_ISD_2 = new L.geoJson(json_VZC_ISD_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VZC_ISD_4',
-            layerName: 'layer_VZC_ISD_4',
-            pane: 'pane_VZC_ISD_4',
-            onEachFeature: pop_VZC_ISD_4,
-            style: style_VZC_ISD_4_0,
+            dataVar: 'json_VZC_ISD_2',
+            layerName: 'layer_VZC_ISD_2',
+            pane: 'pane_VZC_ISD_2',
+            onEachFeature: pop_VZC_ISD_2,
+            style: style_VZC_ISD_2_0,
         });
-        bounds_group.addLayer(layer_VZC_ISD_4);
-        function pop_VZC_Precincts_5(feature, layer) {
+        bounds_group.addLayer(layer_VZC_ISD_2);
+        function pop_VZC_Precincts_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td class="visible-with-data" id="PREC" colspan="2"><strong>Voting Precinct</strong><br />' + (feature.properties['PREC'] !== null ? autolinker.link(String(feature.properties['PREC']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -657,15 +408,15 @@
 			});
 			layer.bindPopup(content, { maxHeight: 400 });
         }
-        function style_VZC_Precincts_5_0(feature) {
+        function style_VZC_Precincts_3_0(feature) {
             var context = {
                 feature: feature,
                 variables: {}
             };
             // Start of if blocks and style check logic
-            if (exp_VZC_Precincts_5rule0_eval_expression(context)) {
+            if (exp_VZC_Precincts_3rule0_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -678,9 +429,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule1_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule1_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -693,9 +444,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule2_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule2_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -708,9 +459,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule3_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule3_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -723,9 +474,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule4_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule4_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -738,9 +489,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule5_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule5_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -753,9 +504,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule6_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule6_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -768,9 +519,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule7_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule7_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -783,9 +534,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule8_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule8_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -798,9 +549,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule9_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule9_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -813,9 +564,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule10_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule10_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -828,9 +579,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule11_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule11_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -843,9 +594,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule12_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule12_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -858,9 +609,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule13_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule13_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -873,9 +624,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule14_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule14_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -888,9 +639,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule15_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule15_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -903,9 +654,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule16_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule16_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -918,9 +669,9 @@
                 interactive: true,
             };
                 }
-                else if (exp_VZC_Precincts_5rule17_eval_expression(context)) {
+                else if (exp_VZC_Precincts_3rule17_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Precincts_5',
+                pane: 'pane_VZC_Precincts_3',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.301)',
                 dashArray: '',
@@ -937,138 +688,21 @@
                 return {fill: false, stroke: false};
             }
         }
-        map.createPane('pane_VZC_Precincts_5');
-        map.getPane('pane_VZC_Precincts_5').style.zIndex = 405;
-        map.getPane('pane_VZC_Precincts_5').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_Precincts_5 = new L.geoJson(json_VZC_Precincts_5, {
+        map.createPane('pane_VZC_Precincts_3');
+        map.getPane('pane_VZC_Precincts_3').style.zIndex = 403;
+        map.getPane('pane_VZC_Precincts_3').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Precincts_3 = new L.geoJson(json_VZC_Precincts_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VZC_Precincts_5',
-            layerName: 'layer_VZC_Precincts_5',
-            pane: 'pane_VZC_Precincts_5',
-            onEachFeature: pop_VZC_Precincts_5,
-            style: style_VZC_Precincts_5_0,
+            dataVar: 'json_VZC_Precincts_3',
+            layerName: 'layer_VZC_Precincts_3',
+            pane: 'pane_VZC_Precincts_3',
+            onEachFeature: pop_VZC_Precincts_3,
+            style: style_VZC_Precincts_3_0,
         });
-        bounds_group.addLayer(layer_VZC_Precincts_5);
-        map.addLayer(layer_VZC_Precincts_5);
-        function pop_VZC_Rivers_6(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['RCH_'] !== null ? autolinker.link(String(feature.properties['RCH_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['RCH_ID'] !== null ? autolinker.link(String(feature.properties['RCH_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">COM_ID</th>\
-                        <td class="visible-with-data" id="COM_ID">' + (feature.properties['COM_ID'] !== null ? autolinker.link(String(feature.properties['COM_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">RCH_CODE</th>\
-                        <td>' + (feature.properties['RCH_CODE'] !== null ? autolinker.link(String(feature.properties['RCH_CODE']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['RCH_DATE'] !== null ? autolinker.link(String(feature.properties['RCH_DATE']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['LEVEL_'] !== null ? autolinker.link(String(feature.properties['LEVEL_']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['METERS'] !== null ? autolinker.link(String(feature.properties['METERS']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['GNIS_ID'] !== null ? autolinker.link(String(feature.properties['GNIS_ID']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(String(feature.properties['NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['SHAPE_len'] !== null ? autolinker.link(String(feature.properties['SHAPE_len']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_VZC_Rivers_6_0() {
-            return {
-                pane: 'pane_VZC_Rivers_6',
-                opacity: 1,
-                color: 'rgba(29,14,145,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_VZC_Rivers_6');
-        map.getPane('pane_VZC_Rivers_6').style.zIndex = 406;
-        map.getPane('pane_VZC_Rivers_6').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_Rivers_6 = new L.geoJson(json_VZC_Rivers_6, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_VZC_Rivers_6',
-            layerName: 'layer_VZC_Rivers_6',
-            pane: 'pane_VZC_Rivers_6',
-            onEachFeature: pop_VZC_Rivers_6,
-            style: style_VZC_Rivers_6_0,
-        });
-        bounds_group.addLayer(layer_VZC_Rivers_6);
-        function pop_VZC_AreaWater_7(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['FULLNAME'] !== null ? autolinker.link(String(feature.properties['FULLNAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Latitude</th>\
-                        <td class="visible-with-data" id="INTPTLAT">' + (feature.properties['INTPTLAT'] !== null ? autolinker.link(String(feature.properties['INTPTLAT']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Longitude</th>\
-                        <td class="visible-with-data" id="INTPTLON">' + (feature.properties['INTPTLON'] !== null ? autolinker.link(String(feature.properties['INTPTLON']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_VZC_AreaWater_7_0() {
-            return {
-                pane: 'pane_VZC_AreaWater_7',
-                opacity: 1,
-                color: 'rgba(31,120,180,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1.0, 
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(31,120,180,1.0)',
-                interactive: true,
-            }
-        }
-        map.createPane('pane_VZC_AreaWater_7');
-        map.getPane('pane_VZC_AreaWater_7').style.zIndex = 407;
-        map.getPane('pane_VZC_AreaWater_7').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_AreaWater_7 = new L.geoJson(json_VZC_AreaWater_7, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_VZC_AreaWater_7',
-            layerName: 'layer_VZC_AreaWater_7',
-            pane: 'pane_VZC_AreaWater_7',
-            onEachFeature: pop_VZC_AreaWater_7,
-            style: style_VZC_AreaWater_7_0,
-        });
-        bounds_group.addLayer(layer_VZC_AreaWater_7);
-        function pop_VZC_CityBoundary_8(feature, layer) {
+        bounds_group.addLayer(layer_VZC_Precincts_3);
+        map.addLayer(layer_VZC_Precincts_3);
+        function pop_VZC_CityBoundary_4(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['NAME'] !== null ? autolinker.link(String(feature.properties['NAME']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -1087,9 +721,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_VZC_CityBoundary_8_0() {
+        function style_VZC_CityBoundary_4_0() {
             return {
-                pane: 'pane_VZC_CityBoundary_8',
+                pane: 'pane_VZC_CityBoundary_4',
                 opacity: 1,
                 color: 'rgba(35,35,35,0.302)',
                 dashArray: '',
@@ -1102,20 +736,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_VZC_CityBoundary_8');
-        map.getPane('pane_VZC_CityBoundary_8').style.zIndex = 408;
-        map.getPane('pane_VZC_CityBoundary_8').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_CityBoundary_8 = new L.geoJson(json_VZC_CityBoundary_8, {
+        map.createPane('pane_VZC_CityBoundary_4');
+        map.getPane('pane_VZC_CityBoundary_4').style.zIndex = 404;
+        map.getPane('pane_VZC_CityBoundary_4').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_CityBoundary_4 = new L.geoJson(json_VZC_CityBoundary_4, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VZC_CityBoundary_8',
-            layerName: 'layer_VZC_CityBoundary_8',
-            pane: 'pane_VZC_CityBoundary_8',
-            onEachFeature: pop_VZC_CityBoundary_8,
-            style: style_VZC_CityBoundary_8_0,
+            dataVar: 'json_VZC_CityBoundary_4',
+            layerName: 'layer_VZC_CityBoundary_4',
+            pane: 'pane_VZC_CityBoundary_4',
+            onEachFeature: pop_VZC_CityBoundary_4,
+            style: style_VZC_CityBoundary_4_0,
         });
-        bounds_group.addLayer(layer_VZC_CityBoundary_8);
-        function pop_VZC_Cities_9(feature, layer) {
+        bounds_group.addLayer(layer_VZC_CityBoundary_4);
+        function pop_VZC_Cities_5(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['CITY_NM'] !== null ? autolinker.link(String(feature.properties['CITY_NM']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -1127,15 +761,15 @@
 			});
 			layer.bindPopup(content, { maxHeight: 400 });
         }
-        function style_VZC_Cities_9_0(feature) {
+        function style_VZC_Cities_5_0(feature) {
             var context = {
                 feature: feature,
                 variables: {}
             };
             // Start of if blocks and style check logic
-            if (exp_VZC_Cities_9rule0_eval_expression(context)) {
+            if (exp_VZC_Cities_5rule0_eval_expression(context)) {
                   return {
-                pane: 'pane_VZC_Cities_9',
+                pane: 'pane_VZC_Cities_5',
                 radius: 4.0,
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
@@ -1153,75 +787,31 @@
                 return {fill: false, stroke: false};
             }
         }
-        map.createPane('pane_VZC_Cities_9');
-        map.getPane('pane_VZC_Cities_9').style.zIndex = 409;
-        map.getPane('pane_VZC_Cities_9').style['mix-blend-mode'] = 'normal';
-        var layer_VZC_Cities_9 = new L.geoJson(json_VZC_Cities_9, {
+        map.createPane('pane_VZC_Cities_5');
+        map.getPane('pane_VZC_Cities_5').style.zIndex = 405;
+        map.getPane('pane_VZC_Cities_5').style['mix-blend-mode'] = 'normal';
+        var layer_VZC_Cities_5 = new L.geoJson(json_VZC_Cities_5, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_VZC_Cities_9',
-            layerName: 'layer_VZC_Cities_9',
-            pane: 'pane_VZC_Cities_9',
-            onEachFeature: pop_VZC_Cities_9,
+            dataVar: 'json_VZC_Cities_5',
+            layerName: 'layer_VZC_Cities_5',
+            pane: 'pane_VZC_Cities_5',
+            onEachFeature: pop_VZC_Cities_5,
             pointToLayer: function (feature, latlng) {
                 var context = {
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_VZC_Cities_9_0(feature));
+                return L.circleMarker(latlng, style_VZC_Cities_5_0(feature));
             },
         });
-        bounds_group.addLayer(layer_VZC_Cities_9);
-        map.addLayer(layer_VZC_Cities_9);
-        function pop_VCZ_FlowingStreams_10(feature, layer) {
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['STRM_NM'] !== null ? autolinker.link(String(feature.properties['STRM_NM']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
-			layer.on('popupopen', function(e) {
-				addClassToPopupIfMedia(content, e.popup);
-			});
-			layer.bindPopup(content, { maxHeight: 400 });
-        }
-
-        function style_VCZ_FlowingStreams_10_0() {
-            return {
-                pane: 'pane_VCZ_FlowingStreams_10',
-                opacity: 1,
-                color: 'rgba(24,42,240,1.0)',
-                dashArray: '',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 1.0,
-                fillOpacity: 0,
-                interactive: false,
-            }
-        }
-        map.createPane('pane_VCZ_FlowingStreams_10');
-        map.getPane('pane_VCZ_FlowingStreams_10').style.zIndex = 410;
-        map.getPane('pane_VCZ_FlowingStreams_10').style['mix-blend-mode'] = 'normal';
-        var layer_VCZ_FlowingStreams_10 = new L.geoJson(json_VCZ_FlowingStreams_10, {
-            attribution: '',
-            interactive: false,
-            dataVar: 'json_VCZ_FlowingStreams_10',
-            layerName: 'layer_VCZ_FlowingStreams_10',
-            pane: 'pane_VCZ_FlowingStreams_10',
-            onEachFeature: pop_VCZ_FlowingStreams_10,
-            style: style_VCZ_FlowingStreams_10_0,
-        });
-        bounds_group.addLayer(layer_VCZ_FlowingStreams_10);
+        bounds_group.addLayer(layer_VZC_Cities_5);
+        map.addLayer(layer_VZC_Cities_5);
         var overlaysTree = [
-            {label: '<img src="legend/VCZ_FlowingStreams_10.png" /> VCZ_FlowingStreams', layer: layer_VCZ_FlowingStreams_10},
-            {label: 'VZC_Cities<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Cities_9_0.png" /></td><td></td></tr></table>', layer: layer_VZC_Cities_9},
-            {label: '<img src="legend/VZC_CityBoundary_8.png" /> VZC_CityBoundary', layer: layer_VZC_CityBoundary_8},
-            {label: '<img src="legend/VZC_AreaWater_7.png" /> VZC_AreaWater', layer: layer_VZC_AreaWater_7},
-            {label: '<img src="legend/VZC_Rivers_6.png" /> VZC_Rivers', layer: layer_VZC_Rivers_6},
-            {label: 'VZC_Precincts<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_1A0.png" /></td><td>1A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_1B1.png" /></td><td>1B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_1C2.png" /></td><td>1C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_1D3.png" /></td><td>1D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_1E4.png" /></td><td>1E</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_2A5.png" /></td><td>2A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_2B6.png" /></td><td>2B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_2C7.png" /></td><td>2C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_2D8.png" /></td><td>2D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_3A9.png" /></td><td>3A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_3B10.png" /></td><td>3B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_3C11.png" /></td><td>3C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_3D12.png" /></td><td>3D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_4A13.png" /></td><td>4A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_4B14.png" /></td><td>4B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_4C15.png" /></td><td>4C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_4D16.png" /></td><td>4D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_5_4E17.png" /></td><td>4E</td></tr></table>', layer: layer_VZC_Precincts_5},
-            {label: 'VZC_ISD<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_AthensISD0.png" /></td><td>Athens ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_BrownsboroISD1.png" /></td><td>Brownsboro ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_CantonISD2.png" /></td><td>Canton ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_EdgewoodISD3.png" /></td><td>Edgewood ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_FruitvaleISD4.png" /></td><td>Fruitvale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_GrandSalineISD5.png" /></td><td>Grand Saline ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_LindaleISD6.png" /></td><td>Lindale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_MabankISD7.png" /></td><td>Mabank ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_MartinsMillISD8.png" /></td><td>Martins Mill ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_VanISD9.png" /></td><td>Van ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_WillsPointISD10.png" /></td><td>Wills Point ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_EustaceISD11.png" /></td><td>Eustace ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_4_Other12.png" /></td><td>Other</td></tr></table>', layer: layer_VZC_ISD_4},
-            {label: 'VZC_LithiumDeposits<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_OuterSaltGas1.png" /></td><td>Outer/Salt/Gas</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_OuterGas2.png" /></td><td>Outer/Gas</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_InnerGas3.png" /></td><td>Inner/Gas</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_InnerSandstoneOil4.png" /></td><td>Inner/Sandstone/Oil</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_InnerSandstoneGas5.png" /></td><td>Inner/Sandstone/Gas</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_InnerSaltOil6.png" /></td><td>Inner/Salt/Oil</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_LithiumDeposits_3_InnerSaltGas7.png" /></td><td>Inner/Salt/Gas</td></tr></table>', layer: layer_VZC_LithiumDeposits_3},
-            {label: 'VZC_Aquifer<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_0.png" /></td><td></td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_CarrizoWilcoxOutcrop1.png" /></td><td>Carrizo-Wilcox Outcrop</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Aquifer_2_CarrizoWilcoxSubcrop2.png" /></td><td>Carrizo-Wilcox Subcrop</td></tr></table>', layer: layer_VZC_Aquifer_2},
+            {label: 'VZC_Cities<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Cities_5_0.png" /></td><td></td></tr></table>', layer: layer_VZC_Cities_5},
+            {label: '<img src="legend/VZC_CityBoundary_4.png" /> VZC_CityBoundary', layer: layer_VZC_CityBoundary_4},
+            {label: 'VZC_Precincts<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_1A0.png" /></td><td>1A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_1B1.png" /></td><td>1B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_1C2.png" /></td><td>1C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_1D3.png" /></td><td>1D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_1E4.png" /></td><td>1E</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_2A5.png" /></td><td>2A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_2B6.png" /></td><td>2B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_2C7.png" /></td><td>2C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_2D8.png" /></td><td>2D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_3A9.png" /></td><td>3A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_3B10.png" /></td><td>3B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_3C11.png" /></td><td>3C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_3D12.png" /></td><td>3D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_4A13.png" /></td><td>4A</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_4B14.png" /></td><td>4B</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_4C15.png" /></td><td>4C</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_4D16.png" /></td><td>4D</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_Precincts_3_4E17.png" /></td><td>4E</td></tr></table>', layer: layer_VZC_Precincts_3},
+            {label: 'VZC_ISD<br /><table><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_AthensISD0.png" /></td><td>Athens ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_BrownsboroISD1.png" /></td><td>Brownsboro ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_CantonISD2.png" /></td><td>Canton ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_EdgewoodISD3.png" /></td><td>Edgewood ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_FruitvaleISD4.png" /></td><td>Fruitvale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_GrandSalineISD5.png" /></td><td>Grand Saline ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_LindaleISD6.png" /></td><td>Lindale ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_MabankISD7.png" /></td><td>Mabank ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_MartinsMillISD8.png" /></td><td>Martins Mill ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_VanISD9.png" /></td><td>Van ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_WillsPointISD10.png" /></td><td>Wills Point ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_EustaceISD11.png" /></td><td>Eustace ISD</td></tr><tr><td style="text-align: center;"><img src="legend/VZC_ISD_2_Other12.png" /></td><td>Other</td></tr></table>', layer: layer_VZC_ISD_2},
             {label: '<img src="legend/VanZandtCounty_1.png" /> VanZandtCounty', layer: layer_VanZandtCounty_1},
             {label: "OSM Standard", layer: layer_OSMStandard_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
@@ -1236,12 +826,12 @@
         lay.addTo(map);
         setBounds();
         var i = 0;
-        layer_VZC_Aquifer_2.eachLayer(function(layer) {
+        layer_VZC_ISD_2.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['AQ_NAME'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['AQ_NAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Aquifer_2'});
+            layer.bindTooltip((layer.feature.properties['NAME20'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAME20']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_ISD_2'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -1249,66 +839,27 @@
               i++;
         });
         var i = 0;
-        layer_VZC_ISD_4.eachLayer(function(layer) {
+        layer_VZC_Precincts_3.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['NAME20'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAME20']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_ISD_4'});
+            layer.bindTooltip((layer.feature.properties['PREC'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['PREC']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Precincts_3'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        var i = 0;
-        layer_VZC_Precincts_5.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['PREC'] !== null?String('<div style="color: #323232; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['PREC']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Precincts_5'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        var i = 0;
-        layer_VZC_Rivers_6.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['NAME'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['NAME']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VZC_Rivers_6'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        var i = 0;
-        layer_VCZ_FlowingStreams_10.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['STRM_NM'] !== null?String('<div style="color: #323232; font-size: 8pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['STRM_NM']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_VCZ_FlowingStreams_10'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        resetLabels([layer_VZC_Aquifer_2,layer_VZC_LithiumDeposits_3,layer_VZC_ISD_4,layer_VZC_Precincts_5,layer_VZC_Rivers_6,layer_VCZ_FlowingStreams_10]);
+        resetLabels([layer_VZC_ISD_2,layer_VZC_Precincts_3]);
         map.on("zoomend", function(){
-            resetLabels([layer_VZC_Aquifer_2,layer_VZC_LithiumDeposits_3,layer_VZC_ISD_4,layer_VZC_Precincts_5,layer_VZC_Rivers_6,layer_VCZ_FlowingStreams_10]);
+            resetLabels([layer_VZC_ISD_2,layer_VZC_Precincts_3]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_VZC_Aquifer_2,layer_VZC_LithiumDeposits_3,layer_VZC_ISD_4,layer_VZC_Precincts_5,layer_VZC_Rivers_6,layer_VCZ_FlowingStreams_10]);
+            resetLabels([layer_VZC_ISD_2,layer_VZC_Precincts_3]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_VZC_Aquifer_2,layer_VZC_LithiumDeposits_3,layer_VZC_ISD_4,layer_VZC_Precincts_5,layer_VZC_Rivers_6,layer_VCZ_FlowingStreams_10]);
+            resetLabels([layer_VZC_ISD_2,layer_VZC_Precincts_3]);
         });
         </script>
     </body>
