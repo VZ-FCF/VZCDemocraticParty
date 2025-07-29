@@ -796,7 +796,111 @@ function exp_VZC_Aquifer_2rule2_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule0_eval_expression(context) {
+function exp_VZC_LithiumDeposits_3rule0_eval_expression(context) {
+    // 
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return null;
+    } else {
+        return null;
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule1_eval_expression(context) {
+    // ASSESSCODE = '50490182'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490182');
+    } else {
+        return (feature['ASSESSCODE']  == '50490182');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule2_eval_expression(context) {
+    // ASSESSCODE = '50490183'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490183');
+    } else {
+        return (feature['ASSESSCODE']  == '50490183');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule3_eval_expression(context) {
+    // ASSESSCODE = '50490184'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490184');
+    } else {
+        return (feature['ASSESSCODE']  == '50490184');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule4_eval_expression(context) {
+    // ASSESSCODE = '50490185'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490185');
+    } else {
+        return (feature['ASSESSCODE']  == '50490185');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule5_eval_expression(context) {
+    // ASSESSCODE = '50490186'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490186');
+    } else {
+        return (feature['ASSESSCODE']  == '50490186');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule6_eval_expression(context) {
+    // ASSESSCODE = '50490187'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490187');
+    } else {
+        return (feature['ASSESSCODE']  == '50490187');
+    }
+}
+
+
+function exp_VZC_LithiumDeposits_3rule7_eval_expression(context) {
+    // ASSESSCODE = '50490188'
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return (feature.properties['ASSESSCODE']  == '50490188');
+    } else {
+        return (feature['ASSESSCODE']  == '50490188');
+    }
+}
+
+
+function exp_VZC_ISD_4rule0_eval_expression(context) {
     // NAME20 = 'Athens ISD'
 
     var feature = context.feature;
@@ -809,7 +913,7 @@ function exp_VZC_ISD_3rule0_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule1_eval_expression(context) {
+function exp_VZC_ISD_4rule1_eval_expression(context) {
     // NAME20 = 'Brownsboro ISD'
 
     var feature = context.feature;
@@ -822,7 +926,7 @@ function exp_VZC_ISD_3rule1_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule2_eval_expression(context) {
+function exp_VZC_ISD_4rule2_eval_expression(context) {
     // NAME20 = 'Canton ISD'
 
     var feature = context.feature;
@@ -835,7 +939,7 @@ function exp_VZC_ISD_3rule2_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule3_eval_expression(context) {
+function exp_VZC_ISD_4rule3_eval_expression(context) {
     // NAME20 = 'Edgewood ISD'
 
     var feature = context.feature;
@@ -848,7 +952,7 @@ function exp_VZC_ISD_3rule3_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule4_eval_expression(context) {
+function exp_VZC_ISD_4rule4_eval_expression(context) {
     // NAME20 = 'Fruitvale ISD'
 
     var feature = context.feature;
@@ -861,7 +965,7 @@ function exp_VZC_ISD_3rule4_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule5_eval_expression(context) {
+function exp_VZC_ISD_4rule5_eval_expression(context) {
     // NAME20 = 'Grand Saline ISD'
 
     var feature = context.feature;
@@ -874,7 +978,7 @@ function exp_VZC_ISD_3rule5_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule6_eval_expression(context) {
+function exp_VZC_ISD_4rule6_eval_expression(context) {
     // NAME20 = 'Lindale ISD'
 
     var feature = context.feature;
@@ -887,7 +991,7 @@ function exp_VZC_ISD_3rule6_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule7_eval_expression(context) {
+function exp_VZC_ISD_4rule7_eval_expression(context) {
     // NAME20 = 'Mabank ISD'
 
     var feature = context.feature;
@@ -900,7 +1004,7 @@ function exp_VZC_ISD_3rule7_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule8_eval_expression(context) {
+function exp_VZC_ISD_4rule8_eval_expression(context) {
     // NAME20 = 'Martins Mill ISD'
 
     var feature = context.feature;
@@ -913,7 +1017,7 @@ function exp_VZC_ISD_3rule8_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule9_eval_expression(context) {
+function exp_VZC_ISD_4rule9_eval_expression(context) {
     // NAME20 = 'Van ISD'
 
     var feature = context.feature;
@@ -926,7 +1030,7 @@ function exp_VZC_ISD_3rule9_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule10_eval_expression(context) {
+function exp_VZC_ISD_4rule10_eval_expression(context) {
     // NAME20 = 'Wills Point ISD'
 
     var feature = context.feature;
@@ -939,7 +1043,7 @@ function exp_VZC_ISD_3rule10_eval_expression(context) {
 }
 
 
-function exp_VZC_ISD_3rule11_eval_expression(context) {
+function exp_VZC_ISD_4rule11_eval_expression(context) {
     // NAME20 = 'Eustace ISD'
 
     var feature = context.feature;
@@ -952,7 +1056,7 @@ function exp_VZC_ISD_3rule11_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule0_eval_expression(context) {
+function exp_VZC_Precincts_5rule0_eval_expression(context) {
     // PREC = '1A'
 
     var feature = context.feature;
@@ -965,7 +1069,7 @@ function exp_VZC_Precincts_4rule0_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule1_eval_expression(context) {
+function exp_VZC_Precincts_5rule1_eval_expression(context) {
     // PREC = '1B'
 
     var feature = context.feature;
@@ -978,7 +1082,7 @@ function exp_VZC_Precincts_4rule1_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule2_eval_expression(context) {
+function exp_VZC_Precincts_5rule2_eval_expression(context) {
     // PREC = '1C'
 
     var feature = context.feature;
@@ -991,7 +1095,7 @@ function exp_VZC_Precincts_4rule2_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule3_eval_expression(context) {
+function exp_VZC_Precincts_5rule3_eval_expression(context) {
     // PREC = '1D'
 
     var feature = context.feature;
@@ -1004,7 +1108,7 @@ function exp_VZC_Precincts_4rule3_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule4_eval_expression(context) {
+function exp_VZC_Precincts_5rule4_eval_expression(context) {
     // PREC = '1E'
 
     var feature = context.feature;
@@ -1017,7 +1121,7 @@ function exp_VZC_Precincts_4rule4_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule5_eval_expression(context) {
+function exp_VZC_Precincts_5rule5_eval_expression(context) {
     // PREC = '2A'
 
     var feature = context.feature;
@@ -1030,7 +1134,7 @@ function exp_VZC_Precincts_4rule5_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule6_eval_expression(context) {
+function exp_VZC_Precincts_5rule6_eval_expression(context) {
     // PREC = '2B'
 
     var feature = context.feature;
@@ -1043,7 +1147,7 @@ function exp_VZC_Precincts_4rule6_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule7_eval_expression(context) {
+function exp_VZC_Precincts_5rule7_eval_expression(context) {
     // PREC = '2C'
 
     var feature = context.feature;
@@ -1056,7 +1160,7 @@ function exp_VZC_Precincts_4rule7_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule8_eval_expression(context) {
+function exp_VZC_Precincts_5rule8_eval_expression(context) {
     // PREC = '2D'
 
     var feature = context.feature;
@@ -1069,7 +1173,7 @@ function exp_VZC_Precincts_4rule8_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule9_eval_expression(context) {
+function exp_VZC_Precincts_5rule9_eval_expression(context) {
     // PREC = '3A'
 
     var feature = context.feature;
@@ -1082,7 +1186,7 @@ function exp_VZC_Precincts_4rule9_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule10_eval_expression(context) {
+function exp_VZC_Precincts_5rule10_eval_expression(context) {
     // PREC = '3B'
 
     var feature = context.feature;
@@ -1095,7 +1199,7 @@ function exp_VZC_Precincts_4rule10_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule11_eval_expression(context) {
+function exp_VZC_Precincts_5rule11_eval_expression(context) {
     // PREC = '3C'
 
     var feature = context.feature;
@@ -1108,7 +1212,7 @@ function exp_VZC_Precincts_4rule11_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule12_eval_expression(context) {
+function exp_VZC_Precincts_5rule12_eval_expression(context) {
     // PREC = '3D'
 
     var feature = context.feature;
@@ -1121,7 +1225,7 @@ function exp_VZC_Precincts_4rule12_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule13_eval_expression(context) {
+function exp_VZC_Precincts_5rule13_eval_expression(context) {
     // PREC = '4A'
 
     var feature = context.feature;
@@ -1134,7 +1238,7 @@ function exp_VZC_Precincts_4rule13_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule14_eval_expression(context) {
+function exp_VZC_Precincts_5rule14_eval_expression(context) {
     // PREC = '4B'
 
     var feature = context.feature;
@@ -1147,7 +1251,7 @@ function exp_VZC_Precincts_4rule14_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule15_eval_expression(context) {
+function exp_VZC_Precincts_5rule15_eval_expression(context) {
     // PREC = '4C'
 
     var feature = context.feature;
@@ -1160,7 +1264,7 @@ function exp_VZC_Precincts_4rule15_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule16_eval_expression(context) {
+function exp_VZC_Precincts_5rule16_eval_expression(context) {
     // PREC = '4D'
 
     var feature = context.feature;
@@ -1173,7 +1277,7 @@ function exp_VZC_Precincts_4rule16_eval_expression(context) {
 }
 
 
-function exp_VZC_Precincts_4rule17_eval_expression(context) {
+function exp_VZC_Precincts_5rule17_eval_expression(context) {
     // PREC = '4E'
 
     var feature = context.feature;
@@ -1186,7 +1290,7 @@ function exp_VZC_Precincts_4rule17_eval_expression(context) {
 }
 
 
-function exp_VZC_Cities_8rule0_eval_expression(context) {
+function exp_VZC_Cities_9rule0_eval_expression(context) {
     // POP2010 > 0
 
     var feature = context.feature;
