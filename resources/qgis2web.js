@@ -8,11 +8,16 @@ var map = new ol.Map({
         maxZoom: 28,
         minZoom: 2,
         
+        projection: new ol.proj.Projection({
+            code: 'EPSG:3857',
+            //extent: [-10713734.175143, 3764047.391767, -10606790.881412, 3874813.879129],
+            units: 'm'
+        })
     })
 });
 
 //initial view - epsg:3857 coordinates if not "Match project CRS"
-map.getView().fit([-10774422.647830, 3791454.849939, -10592201.705435, 3903681.686422], map.getSize());
+map.getView().fit([-10774404.189469, 3777578.776859, -10592183.247074, 3889805.613342], map.getSize());
 
 //change cursor
 function pointerOnFeature(evt) {
