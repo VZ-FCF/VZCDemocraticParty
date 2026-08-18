@@ -4,3 +4,4 @@ Van Zandt County map with voting precincts, independent school districts, cities
 July 31, 2-26
 Added Emergency Service District 3
 Changed width for #map to 678px, height 754px in index file
+Added Commissioner Precincts, ESDs from ETCOG, removed ESD3
