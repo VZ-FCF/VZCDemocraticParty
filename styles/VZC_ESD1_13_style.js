@@ -1,7 +1,7 @@
 var size = 0;
 var placement = 'point';
 
-var style_VZC_ESD4_8 = function(feature, resolution){
+var style_VZC_ESD1_13 = function(feature, resolution){
     var context = {
         feature: feature,
         variables: {}
@@ -23,7 +23,7 @@ var style_VZC_ESD4_8 = function(feature, resolution){
         labelText = String("");
     }
     var style = [ new ol.style.Style({
-        stroke: new ol.style.Stroke({color: 'rgba(227,26,28,1.0)', lineDash: [4.9399999999999995,0.988,1.976,0.988], lineCap: 'butt', lineJoin: 'miter', width: 0.988}),fill: new ol.style.Fill({color: 'rgba(190,207,80,1.0)'}),
+        stroke: new ol.style.Stroke({color: 'rgba(227,26,28,1.0)', lineDash: [4.9399999999999995,0.988,1.976,0.988], lineCap: 'butt', lineJoin: 'miter', width: 0.988}),fill: new ol.style.Fill({color: 'rgba(166,206,227,1.0)'}),
         text: createTextStyle(feature, resolution, labelText, labelFont,
                               labelFill, placement, bufferColor,
                               bufferWidth, textAlign, offsetX, offsetY, overflow, repeat)

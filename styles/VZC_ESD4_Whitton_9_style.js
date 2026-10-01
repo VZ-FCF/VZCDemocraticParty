@@ -1,7 +1,7 @@
 var size = 0;
 var placement = 'point';
 
-var style_VZC_ESD4_8 = function(feature, resolution){
+var style_VZC_ESD4_Whitton_9 = function(feature, resolution){
     var context = {
         feature: feature,
         variables: {}
