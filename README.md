@@ -6,3 +6,5 @@ Added Emergency Service District 3
 Changed width for #map to 678px, height 754px in index file
 Added Commissioner Precincts, ESDs from ETCOG, removed ESD3
 Removed ESDs from ETCOG, added ESDs from VZC Appraisal District
+ESD4, ESD4+Whitton from ESD4 legal description
+ESD1, ESD1+Whitton
